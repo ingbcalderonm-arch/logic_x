@@ -105,7 +105,7 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 #focusOverlay { 
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(0, 0, 0, 0.98); z-index: 5000; 
-    display: none; /* Se activa por JS */
+    display: none; 
     flex-direction: column; align-items: center; justify-content: center; text-align: center; 
 }
 
@@ -233,15 +233,15 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
     <button class="btn-prime" onclick="saveSubPrefs()" style="margin-top:10px;">GUARDAR</button>
     
     <div id="adminZone" class="admin-zone">
-        <p style="font-size:11px; color:var(--primary-light); font-weight:bold; margin:0 0 10px 0;">🛡️ GESTIÓN ADMIN</p>
+        <p style="font-size:11px; color:var(--primary-light); font-weight:bold; margin:0 0 10px 0;">🛡️ GESTIÓN ADMIN (USUARIOS)</p>
         <select id="adminUserList"></select>
-        <input id="adminNewName" placeholder="Renombrar usuario">
         <div style="display:flex; gap:10px; margin-top:10px;">
-            <button class="btn-prime" style="font-size:10px;" onclick="modifyUserName()">OK</button>
-            <button class="btn-prime" style="background:#333; font-size:10px;" onclick="deleteUser()">DEL</button>
+            <input id="adminNewName" placeholder="Renombrar" style="margin:0; font-size:10px;">
+            <button class="btn-prime" style="font-size:10px; width:40px;" onclick="modifyUserName()">OK</button>
+            <button class="btn-prime" style="background:#333; font-size:10px; width:40px;" onclick="deleteUser()">DEL</button>
         </div>
     </div>
-    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px; font-weight:bold;">🗑️ BORRAR AJUSTES</button>
+    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px; font-weight:bold;">🗑️ BORRAR MIS AJUSTES</button>
 </div>
 
 <div id="chatInterface">
@@ -254,24 +254,41 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 let currentUser = null;
 const SUBJECTS = ["Ciencia de Datos e IA", "Algoritmia y Programación", "Cálculo Diferencial", "Soluciones de Ingeniería", "Lectura y Escritura", "Habilidades Digitales"];
 
-// --- BASE DE DATOS ---
+// --- 1. BASE DE CONOCIMIENTOS EXPANDIDA (MICRO-CONTENIDOS) ---
 const KNOWLEDGE_DB = {
-    "Ciencia de Datos e IA": { facts: ["💡 El 80% del trabajo es limpiar datos.", "💡 Netflix ahorra mil millones con IA."], lessons: ["📖 Micro: Overfitting es memorizar.", "📖 Micro: Supervisado usa etiquetas."] },
-    "Algoritmia y Programación": { facts: ["💡 Ada Lovelace fue la 1ra.", "💡 'Bug' nació por una polilla real."], lessons: ["📖 Micro: Big O mide eficiencia.", "📖 Micro: Recursión se llama sola."] },
-    "Cálculo Diferencial": { facts: ["💡 Newton usó cálculo para los planetas.", "💡 Significa 'piedra pequeña'."], lessons: ["📖 Micro: Derivada es pendiente.", "📖 Micro: Límite es aproximación."] }
+    "Ciencia de Datos e IA": { 
+        facts: ["💡 El 90% de los datos del mundo se crearon en los últimos 2 años.", "💡 Netflix ahorra mil millones de dólares al año gracias a su IA de recomendaciones.", "💡 La IA puede diagnosticar el cáncer de piel con mayor precisión que los dermatólogos."], 
+        lessons: ["📖 Micro: El 'Overfitting' es cuando la IA memoriza en lugar de aprender.", "📖 Micro: Los datos 'sucios' son la causa #1 de fallos en modelos predictivos.", "📖 Micro: El aprendizaje supervisado requiere etiquetas creadas por humanos."] 
+    },
+    "Algoritmia y Programación": { 
+        facts: ["💡 El primer 'bug' de la historia fue una polilla real atrapada en un relé.", "💡 Ada Lovelace escribió el primer algoritmo 100 años antes de que existieran las computadoras modernas.", "💡 El lenguaje Python no se llama así por la serpiente, sino por el grupo de comedia Monty Python."], 
+        lessons: ["📖 Micro: La recursión es una función que se llama a sí misma hasta llegar a un caso base.", "📖 Micro: La complejidad O(1) es el santo grial de la eficiencia algorítmica.", "📖 Micro: Un puntero es una variable que almacena una dirección de memoria."] 
+    },
+    "Cálculo Diferencial": { 
+        facts: ["💡 Newton y Leibniz inventaron el cálculo casi al mismo tiempo de forma independiente.", "💡 La palabra 'Cálculo' significa 'piedra pequeña' en latín, usada para contar.", "💡 El GPS de tu celular usa derivadas para ajustar tu posición exacta en tiempo real."], 
+        lessons: ["📖 Micro: La derivada representa la pendiente de la recta tangente en un punto.", "📖 Micro: Si el límite de una función no es igual por izquierda y derecha, el límite no existe.", "📖 Micro: La regla de la cadena permite derivar funciones compuestas."] 
+    },
+    "Soluciones de Ingeniería": { 
+        facts: ["💡 Los ingenieros romanos inventaron un hormigón que se endurece bajo el agua.", "💡 La Gran Pirámide de Giza fue la estructura más alta del mundo por 3,800 años.", "💡 El primer puente de hierro fundido se construyó en 1779 y aún sigue en pie."], 
+        lessons: ["📖 Micro: El ciclo de diseño comienza con la empatía y definición del problema.", "📖 Micro: La sostenibilidad busca soluciones que no comprometan el futuro.", "📖 Micro: Un prototipo no debe ser perfecto, debe ser funcional para probar una idea."] 
+    },
+    "Lectura y Escritura": { 
+        facts: ["💡 Leer solo 6 minutos al día reduce los niveles de estrés en un 68%.", "💡 El libro más vendido de la historia después de la Biblia es 'Don Quijote de la Mancha'.", "💡 Escribir a mano activa más áreas del cerebro que escribir en un teclado."], 
+        lessons: ["📖 Micro: La coherencia es la unidad de sentido; la cohesión es la conexión gramatical.", "📖 Micro: Una tesis debe ser debatible, no un hecho obvio.", "📖 Micro: El parafraseo evita el plagio pero requiere citar la fuente original."] 
+    },
+    "Habilidades Digitales": { 
+        facts: ["💡 Cada minuto se suben más de 500 horas de video a YouTube.", "💡 El primer correo electrónico se envió en 1971 por Ray Tomlinson.", "💡 El 80% de los ciberataques se podrían evitar con una buena higiene digital."], 
+        lessons: ["📖 Micro: Tu huella digital es el rastro que dejas en internet y es casi permanente.", "📖 Micro: El phishing usa ingeniería social para robar tus credenciales.", "📖 Micro: Una contraseña segura debe tener al menos 12 caracteres y ser única."] 
+    }
 };
 
-// --- SEGURIDAD Y LOGIN ---
+// --- 2. SEGURIDAD Y LOGIN (GUARDADO DE USUARIOS) ---
 function handleLogin() {
     const id = document.getElementById("userId").value;
     const pass = document.getElementById("userPass").value;
 
     if(!id || !pass) { alert("Complete sus credenciales"); return; }
-    
-    if(id !== pass) {
-        alert("ERROR: La contraseña debe ser idéntica al ID de usuario.");
-        return;
-    }
+    if(id !== pass) { alert("ERROR: La contraseña debe ser idéntica al ID."); return; }
 
     let db = JSON.parse(localStorage.getItem("lx_db")) || {};
     let name;
@@ -299,10 +316,10 @@ function startNeuralEntrance(user) {
     loader.style.display = "flex";
 
     let progress = 0;
-    const steps = ["Identificando...", "Enlazando NRC: 87926...", "Sincronizando IA...", "Enlace Neural Activo"];
+    const steps = ["Identificando...", "Enlazando NRC...", "Sincronizando IA...", "Acceso Concedido"];
 
     const i = setInterval(() => {
-        progress += 2;
+        progress += 4;
         bar.style.width = progress + "%";
         if(progress < 25) status.innerText = steps[0];
         else if(progress < 60) status.innerText = steps[1];
@@ -316,7 +333,7 @@ function startNeuralEntrance(user) {
                 initDashboard(user);
             }, 600);
         }
-    }, 40);
+    }, 50);
 }
 
 function initDashboard(user) {
@@ -332,38 +349,76 @@ function initDashboard(user) {
     let s1 = document.getElementById("subSelect");
     let s2 = document.getElementById("cfgSub");
     s1.innerHTML = ""; s2.innerHTML = "";
-    SUBJECTS.forEach(s => { s1.innerHTML += `<option>${s}</option>`; s2.innerHTML += `<option>${s}</option>`; });
+    SUBJECTS.forEach(s => { 
+        s1.innerHTML += `<option>${s}</option>`; 
+        s2.innerHTML += `<option>${s}</option>`; 
+    });
 
     setTodayFoco(); updateWeather(); renderCalendar(); renderIntensityBars(); calculateScore();
 }
 
-// --- MODO ENFOQUE (CONTROL) ---
-let focusInterval;
+// --- LOGICA DE MATERIAS Y PRESTRACCIONES ---
+function runPrediction() {
+    let sub = document.getElementById("subSelect").value;
+    let panel = document.getElementById("ragPanel");
+    panel.innerHTML = "<em>Procesando micro-aprendizaje...</em>";
+    setTimeout(() => {
+        const data = KNOWLEDGE_DB[sub];
+        if (data) {
+            const combined = [...data.facts, ...data.lessons];
+            panel.innerHTML = combined[Math.floor(Math.random() * combined.length)];
+        }
+    }, 600);
+}
+
+// --- ADMIN CONTROL ---
+function toggleConfig() {
+    let p = document.getElementById("configPanel");
+    p.style.display = (p.style.display === "block") ? "none" : "block";
+    if (currentUser && currentUser.admin) {
+        document.getElementById("adminZone").style.display = "block";
+        loadAdminUsers();
+    }
+}
+
+function loadAdminUsers() {
+    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
+    let list = document.getElementById("adminUserList");
+    list.innerHTML = "";
+    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]} (${id})</option>`; });
+}
+
+function modifyUserName() {
+    let id = document.getElementById("adminUserList").value;
+    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
+    let newName = document.getElementById("adminNewName").value;
+    if(!newName) return;
+    db[id] = newName;
+    localStorage.setItem("lx_db", JSON.stringify(db));
+    loadAdminUsers();
+}
+
+function deleteUser() {
+    let id = document.getElementById("adminUserList").value;
+    if(id === "1000163215") { alert("No puedes borrar al admin."); return; }
+    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
+    delete db[id]; 
+    localStorage.setItem("lx_db", JSON.stringify(db));
+    loadAdminUsers();
+}
+
+// --- RESTO DE FUNCIONES ORIGINALES ---
 function activarFocus() {
     document.getElementById("focusOverlay").style.display = "flex";
     let min = 24, sec = 59;
-    
     focusInterval = setInterval(() => {
         document.getElementById("focusTimer").innerText = `${min}:${sec < 10 ? '0'+sec : sec}`;
-        if(sec === 0) {
-            if(min === 0) {
-                clearInterval(focusInterval);
-                desactivarFocus();
-            } else {
-                min--; sec = 59;
-            }
-        } else {
-            sec--;
-        }
+        if(sec === 0) { if(min === 0) { clearInterval(focusInterval); desactivarFocus(); } else { min--; sec = 59; } } else { sec--; }
     }, 1000);
 }
 
-function desactivarFocus() {
-    clearInterval(focusInterval);
-    document.getElementById("focusOverlay").style.display = "none";
-}
+function desactivarFocus() { clearInterval(focusInterval); document.getElementById("focusOverlay").style.display = "none"; }
 
-// --- LOGICA DASHBOARD ---
 function setTodayFoco() {
     const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const f = new Date();
@@ -384,19 +439,6 @@ function updateWeather() {
     document.getElementById("climaMood").innerText = "🌤️ TEMPLADO: LOGICA ACTIVA";
 }
 
-function runPrediction() {
-    let sub = document.getElementById("subSelect").value;
-    let panel = document.getElementById("ragPanel");
-    panel.innerHTML = "<em>Procesando...</em>";
-    setTimeout(() => {
-        const data = KNOWLEDGE_DB[sub];
-        if (data) {
-            const combined = [...data.facts, ...data.lessons];
-            panel.innerHTML = combined[Math.floor(Math.random() * combined.length)];
-        }
-    }, 600);
-}
-
 function renderIntensityBars() {
     let container = document.getElementById("syncVisualContainer");
     container.innerHTML = "";
@@ -412,20 +454,10 @@ function renderIntensityBars() {
 function calculateScore() {
     let prefs = JSON.parse(localStorage.getItem("lx_prefs")) || {};
     let uPrefs = prefs[currentUser.id] || {};
-    let score = 35;
+    let score = 45;
     Object.values(uPrefs).forEach(p => { score += (p.cantidad * 7); });
     if(score > 99) score = 99;
     document.getElementById("scoreValue").innerText = score + "%";
-    document.getElementById("scoreIndicator").style.borderTopColor = score > 75 ? "#00f2ff" : "#ff4d6d";
-}
-
-function toggleConfig() {
-    let p = document.getElementById("configPanel");
-    p.style.display = (p.style.display === "block") ? "none" : "block";
-    if (currentUser && currentUser.admin) {
-        document.getElementById("adminZone").style.display = "block";
-        loadAdminUsers();
-    }
 }
 
 function saveSubPrefs() {
@@ -456,38 +488,20 @@ function renderCalendar() {
     for(let d=1; d<=dNum; d++) {
         let f = new Date(2026, mes, d).getDay();
         let h = "";
-        if(f===1) h += `<div class="clase-cal c-lunes">IA</div>`;
-        if(f===2) h += `<div class="clase-cal c-martes">Algo</div>`;
-        if(f===3) h += `<div class="clase-cal c-miercoles">Ing</div>`;
+        if(f===1) h += `<div class="clase-cal" style="background:var(--lunes)">IA</div>`;
+        if(f===2) h += `<div class="clase-cal" style="background:var(--martes)">Algo</div>`;
+        if(f===3) h += `<div class="clase-cal" style="background:var(--miercoles)">Ing</div>`;
         cal.innerHTML += `<div class="dia"><strong>${d}</strong>${h}</div>`;
     }
 }
 
-function loadAdminUsers() {
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    let list = document.getElementById("adminUserList");
-    list.innerHTML = "";
-    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]}</option>`; });
-}
-function modifyUserName() {
-    let id = document.getElementById("adminUserList").value;
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    db[id] = document.getElementById("adminNewName").value;
-    localStorage.setItem("lx_db", JSON.stringify(db));
-    loadAdminUsers();
-}
-function deleteUser() {
-    let id = document.getElementById("adminUserList").value;
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    delete db[id]; localStorage.setItem("lx_db", JSON.stringify(db));
-    loadAdminUsers();
-}
 function clearAllUserData() {
     let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
     delete all[currentUser.id];
     localStorage.setItem("lx_prefs", JSON.stringify(all));
     renderIntensityBars(); calculateScore();
 }
+
 function loadSubPrefs() {
     let sub = document.getElementById("cfgSub").value;
     let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
