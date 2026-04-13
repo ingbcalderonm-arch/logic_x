@@ -24,6 +24,36 @@ body {
     min-height: 100vh; overflow-x: hidden;
 }
 
+/* --- INTERFAZ DE CARGA INTERACTIVA --- */
+#neuralLoader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: #000; z-index: 9999; display: none;
+    flex-direction: column; align-items: center; justify-content: center;
+}
+
+.scanner-line {
+    width: 300px; height: 2px; background: var(--accent);
+    box-shadow: 0 0 15px var(--accent);
+    position: absolute; animation: scan 2s infinite ease-in-out;
+}
+
+@keyframes scan { 0% { top: 30%; } 50% { top: 70%; } 100% { top: 30%; } }
+
+.loader-text {
+    font-size: 12px; letter-spacing: 3px; color: var(--accent);
+    margin-top: 20px; font-weight: bold; text-transform: uppercase;
+}
+
+.progress-bar-container {
+    width: 250px; height: 4px; background: #111; border-radius: 10px;
+    margin-top: 15px; overflow: hidden; border: 1px solid #222;
+}
+
+#progressBarFill {
+    width: 0%; height: 100%; background: var(--accent);
+    box-shadow: 0 0 10px var(--accent); transition: 0.1s;
+}
+
 /* --- HEADER BAR --- */
 #headerBar {
     display: none; position: sticky; top: 0; z-index: 1000;
@@ -44,57 +74,72 @@ body {
     border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.3s;
 }
 
-/* --- FOCO DEL DÍA --- */
-#focoDiaCard {
-    background: linear-gradient(135deg, #1a1a1c 0%, #070708 100%);
-    border: 1px solid var(--border); border-left: 5px solid var(--accent);
-    padding: 20px; border-radius: 15px; margin-bottom: 30px;
-}
-.foco-titulo { color: var(--accent); font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px; }
-.foco-fecha { font-size: 18px; font-weight: 800; margin-bottom: 8px; }
-.foco-materias { font-size: 14px; color: var(--text-main); line-height: 1.4; }
-
 /* --- DASHBOARD --- */
 .container { display: none; padding: 30px; max-width: 1400px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; }
 
-/* --- SCORE --- */
+/* SCORE CIRCLE */
 .score-circle {
     width: 115px; height: 115px; border-radius: 50%; border: 6px solid #1a1a1c;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     margin: 15px auto; border-top-color: var(--accent); transition: 1s ease;
 }
 
-/* --- CALENDARIO --- */
-#calendario { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 15px; }
-.dia { background: #161618; padding: 10px; border-radius: 10px; min-height: 105px; border: 1px solid #222; }
-.clase-cal { font-size: 8px; margin-top: 4px; padding: 4px; border-radius: 4px; color: white; font-weight: bold; }
-
-/* --- MONITOR SINCRONIZACIÓN --- */
-.sync-visual-item { margin-bottom: 15px; }
-.sync-label { font-size: 10px; display: flex; justify-content: space-between; margin-bottom: 6px; }
-.sync-bar-bg { height: 6px; background: #1c1c1e; border-radius: 3px; border: 1px solid #222; overflow: hidden; }
-.sync-bar-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: 1.5s ease; }
-
-/* --- LOGIN --- */
+/* LOGIN */
 #loginScreen { display: flex; justify-content: center; align-items: center; height: 100vh; }
 .login-box { background: var(--card-bg); padding: 50px; border-radius: 30px; text-align: center; border: 1px solid var(--border); width: 340px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
 input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; border: 1px solid var(--border); color: white; border-radius: 10px; box-sizing: border-box; outline: none; }
 .btn-prime { background: var(--primary); color: white; border: none; padding: 14px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.3s; }
 
 /* PANELES FLOTANTES */
-.floating-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer; display: none; color: white; font-size: 24px; z-index: 1002; transition: 0.3s; box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4); }
+.floating-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer; display: none; color: white; font-size: 24px; z-index: 1002; transition: 0.3s; }
 #chatLaunch { left: 30px; right: auto; background: var(--accent); color: black; }
-#configPanel { position: fixed; bottom: 100px; right: 30px; width: 360px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; z-index: 1001; max-height: 80vh; overflow-y: auto; padding: 25px; box-shadow: 0 15px 40px rgba(0,0,0,0.8); }
+#configPanel { position: fixed; bottom: 100px; right: 30px; width: 360px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; z-index: 1001; padding: 25px; }
 #chatInterface { position: fixed; bottom: 100px; left: 30px; width: 320px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; padding: 20px; z-index: 1001; }
 #chatHistory { height: 200px; overflow-y: auto; font-size: 12px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 10px; }
 
-/* ADMIN - PROTEGIDO */
+#focoDiaCard { background: linear-gradient(135deg, #1a1a1c, #070708); border-left: 5px solid var(--accent); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 1px solid var(--border); }
+
+/* --- MODO ENFOQUE OVERLAY --- */
+#focusOverlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(0, 0, 0, 0.98); z-index: 5000; 
+    display: none; /* Se activa por JS */
+    flex-direction: column; align-items: center; justify-content: center; text-align: center; 
+}
+
+/* ADMIN */
 .admin-zone { background: rgba(200, 16, 46, 0.05); padding: 15px; border-radius: 15px; border: 1px solid #333; margin-top: 25px; display: none; }
+
+#calendario { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 15px; }
+.dia { background: #161618; padding: 10px; border-radius: 10px; min-height: 105px; border: 1px solid #222; }
+.clase-cal { font-size: 8px; margin-top: 4px; padding: 4px; border-radius: 4px; color: white; font-weight: bold; }
+
+.sync-visual-item { margin-bottom: 15px; }
+.sync-label { font-size: 10px; display: flex; justify-content: space-between; margin-bottom: 6px; }
+.progress-flat { height: 6px; background: #1c1c1e; border-radius: 3px; border: 1px solid #222; overflow: hidden; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: 1.5s ease; }
 </style>
 </head>
 <body>
+
+<!-- MODO ENFOQUE -->
+<div id="focusOverlay">
+    <h2 style="color:var(--accent); letter-spacing: 5px;">MODO ENFOQUE NEURAL</h2>
+    <div id="focusTimer" style="font-size: 100px; font-weight: 900; color: white; margin: 20px;">25:00</div>
+    <p style="color:var(--text-dim); max-width: 500px; margin-bottom: 30px;">La IA ha bloqueado distracciones externas. Concéntrate en tu aprendizaje.</p>
+    <button onclick="desactivarFocus()" style="background:transparent; border:1px solid var(--primary); color:white; padding:12px 30px; border-radius:10px; cursor:pointer; font-weight:bold;">FINALIZAR SESIÓN</button>
+</div>
+
+<!-- CARGA NEURAL -->
+<div id="neuralLoader">
+    <div class="scanner-line"></div>
+    <div id="loaderStatus" class="loader-text">Iniciando Protocolo...</div>
+    <div class="progress-bar-container">
+        <div id="progressBarFill"></div>
+    </div>
+</div>
 
 <div id="headerBar">
     <div class="header-left">
@@ -113,31 +158,35 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 <div id="loginScreen">
     <div class="login-box">
         <h1 style="margin:0; letter-spacing: 6px; color: var(--primary-light);">LOGIC X</h1>
-        <p style="color:var(--text-dim); font-size: 13px; margin-bottom: 30px;">"Deja que la IA sea el motor de tu tiempo y los datos el mapa de tu excelencia."</p>
-        <input id="userId" placeholder="Cédula / Identificación">
+        <p style="color:var(--text-dim); font-size: 13px; margin-bottom: 30px;">Identificación Biométrica Académica</p>
+        <input id="userId" placeholder="ID de Usuario">
         <input id="userPass" type="password" placeholder="Contraseña">
         <button class="btn-prime" onclick="handleLogin()">ACCEDER AL NÚCLEO</button>
+        <p style="font-size: 10px; color: #444; margin-top: 15px;">Seguridad: ID y Contraseña deben ser idénticos.</p>
     </div>
 </div>
 
 <div class="container" id="mainDashboard">
     <div id="focoDiaCard">
-        <div class="foco-titulo">📍 Foco del Día</div>
-        <div id="focoFecha" class="foco-fecha">--</div>
-        <div id="focoMaterias" class="foco-materias">Cargando horario...</div>
+        <div style="color: var(--accent); font-size: 11px; font-weight: bold; text-transform: uppercase; margin-bottom: 5px;">📍 Foco del Día</div>
+        <div id="focoFecha" style="font-size: 18px; font-weight: 800; margin-bottom: 8px;">--</div>
+        <div id="focoMaterias" style="font-size: 14px; color: var(--text-main);">Cargando...</div>
     </div>
 
-    <div style="margin-bottom: 35px;">
-        <h2 id="userNameLabel" style="font-size: 38px; margin:0; font-weight: 900;"></h2>
-        <div id="userMajorLabel" style="color:var(--accent); font-size: 13px; letter-spacing: 2px; font-weight: bold;"></div>
+    <div style="margin-bottom: 35px; display:flex; justify-content:space-between; align-items:flex-end;">
+        <div>
+            <h2 id="userNameLabel" style="font-size: 38px; margin:0; font-weight: 900;"></h2>
+            <div id="userMajorLabel" style="color:var(--accent); font-size: 13px; letter-spacing: 2px; font-weight: bold;"></div>
+        </div>
+        <button onclick="activarFocus()" style="background:var(--accent); color:black; border:none; padding:10px 20px; border-radius:25px; font-weight:bold; cursor:pointer;">⚡ ACTIVAR ENFOQUE</button>
     </div>
 
     <div class="layout">
         <div style="display:flex; flex-direction:column;">
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
-                    <h3 style="margin:0;">📅 Calendario Mensual</h3>
-                    <select id="mesSelector" onchange="renderCalendar()" style="width:auto; height: 30px; font-size: 12px;">
+                    <h3 style="margin:0;">📅 Horario Académico</h3>
+                    <select id="mesSelector" onchange="renderCalendar()" style="width:auto; height: 30px; font-size: 11px;">
                         <option value="3">Abril 2026</option><option value="4">Mayo 2026</option><option value="5">Junio 2026</option>
                     </select>
                 </div>
@@ -161,9 +210,9 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
             <div class="card">
                 <h3 style="margin:0; font-size: 16px; margin-bottom:15px;">📚 Micro-Dosis IA</h3>
                 <select id="subSelect"></select>
-                <button class="btn-prime" onclick="runPrediction()">OBTENER APRENDIZAJE</button>
+                <button class="btn-prime" onclick="runPrediction()">OBTENER MICRO-APRENDIZAJE</button>
                 <div id="ragPanel" style="padding:18px; background:#000; border-radius:15px; margin-top:20px; font-size:13px; color:var(--text-dim); border:1px solid #222; line-height:1.7;">
-                    <em>Analizando materia...</em>
+                    <em>Analizando...</em>
                 </div>
             </div>
         </div>
@@ -174,28 +223,25 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 <button id="cfgBtn" class="floating-btn" onclick="toggleConfig()">⚙️</button>
 
 <div id="configPanel">
-    <h3 style="margin:0 0 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px;">Ajustes</h3>
-    <label style="font-size:11px; color:var(--accent); font-weight: bold;">CONFIGURACIÓN DE MATERIA</label>
+    <h3 style="margin:0 0 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px;">Ajustes IA</h3>
+    <label style="font-size:11px; color:var(--accent); font-weight: bold;">SINCRO POR MATERIA</label>
     <select id="cfgSub" onchange="loadSubPrefs()"></select>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
-        <div><label style="font-size:10px; color:var(--text-dim);">FRECUENCIA</label>
-            <select id="cfgFreq"><option value="15">Cada 15 min</option><option value="30">Cada 30 min</option></select></div>
-        <div><label style="font-size:10px; color:var(--text-dim);">CANTIDAD</label>
-            <select id="cfgQty"><option value="1">1 msg</option><option value="3">3 msg</option><option value="5">5 msg</option></select></div>
+        <select id="cfgFreq"><option value="15">15 min</option><option value="30">30 min</option></select>
+        <select id="cfgQty"><option value="1">1 msg</option><option value="3">3 msg</option><option value="5">5 msg</option></select>
     </div>
-    <button class="btn-prime" onclick="saveSubPrefs()" style="margin-top:10px;">GUARDAR SINCRONIZACIÓN</button>
+    <button class="btn-prime" onclick="saveSubPrefs()" style="margin-top:10px;">GUARDAR</button>
     
     <div id="adminZone" class="admin-zone">
-        <p style="font-size:11px; color:var(--primary-light); font-weight:bold; margin-top:0;">🛡️ PANEL DE ADMINISTRADOR</p>
+        <p style="font-size:11px; color:var(--primary-light); font-weight:bold; margin:0 0 10px 0;">🛡️ GESTIÓN ADMIN</p>
         <select id="adminUserList"></select>
         <input id="adminNewName" placeholder="Renombrar usuario">
         <div style="display:flex; gap:10px; margin-top:10px;">
             <button class="btn-prime" style="font-size:10px;" onclick="modifyUserName()">OK</button>
-            <button class="btn-prime" style="background:#333; font-size:10px;" onclick="deleteUser()">ELIMINAR</button>
+            <button class="btn-prime" style="background:#333; font-size:10px;" onclick="deleteUser()">DEL</button>
         </div>
     </div>
-
-    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px; font-weight:bold;">🗑️ BORRAR MIS AJUSTES</button>
+    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px; font-weight:bold;">🗑️ BORRAR AJUSTES</button>
 </div>
 
 <div id="chatInterface">
@@ -208,52 +254,73 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 let currentUser = null;
 const SUBJECTS = ["Ciencia de Datos e IA", "Algoritmia y Programación", "Cálculo Diferencial", "Soluciones de Ingeniería", "Lectura y Escritura", "Habilidades Digitales"];
 
-// --- BASE DE DATOS DE MICRO-APRENDIZAJE (60 CÁPSULAS) ---
+// --- BASE DE DATOS ---
 const KNOWLEDGE_DB = {
-    "Ciencia de Datos e IA": {
-        facts: ["💡 El 80% del trabajo es limpiar datos.", "💡 Netflix ahorra mil millones con IA.", "💡 Para 2025 generaremos 175 zettabytes.", "💡 IA fue acuñada en 1956.", "💡 GPT-4 tiene 1.7 billones de parámetros."],
-        lessons: ["📖 Micro-Aprendizaje: Overfitting memoriza en vez de aprender.", "📖 Micro-Aprendizaje: Aprendizaje Supervisado usa etiquetas.", "📖 Micro-Aprendizaje: Redes Neuronales imitan el cerebro.", "📖 Micro-Aprendizaje: Las 5 V del Big Data.", "📖 Micro-Aprendizaje: NLP entiende el habla humana."]
-    },
-    "Algoritmia y Programación": {
-        facts: ["💡 Ada Lovelace fue la primera programadora.", "💡 'Bug' nació por una polilla real.", "💡 Python no se llama así por la serpiente.", "💡 El binario es lo único que entiende el CPU.", "💡 Hay más de 700 lenguajes activos."],
-        lessons: ["📖 Micro-Aprendizaje: Big O mide eficiencia.", "📖 Micro-Aprendizaje: Recursión se llama a sí misma.", "📖 Micro-Aprendizaje: API es un puente entre apps.", "📖 Micro-Aprendizaje: Estructuras organizan info.", "📖 Micro-Aprendizaje: Refactorizar mejora el código."]
-    },
-    "Cálculo Diferencial": {
-        facts: ["💡 Newton usó cálculo para los planetas.", "💡 Se usa para medir virus en medicina.", "💡 Cálculo significa 'piedra pequeña'.", "💡 Gráficos 3D usan puro cálculo.", "💡 El Infinito permitió el cálculo."],
-        lessons: ["📖 Micro-Aprendizaje: La Derivada es la pendiente tangente.", "📖 Micro-Aprendizaje: Límite es a donde se acerca una función.", "📖 Micro-Aprendizaje: Regla de la cadena para funciones compuestas.", "📖 Micro-Aprendizaje: Optimización busca máximos/mínimos.", "📖 Micro-Aprendizaje: Función continua no tiene saltos."]
-    },
-    "Soluciones de Ingeniería": {
-        facts: ["💡 Burj Khalifa se inspiró en una flor.", "💡 Golden Gate daría 3 vueltas a la Tierra.", "💡 Biomédica imprime órganos 3D.", "💡 Paneles solares imitan hojas.", "💡 La ingeniería romana duró 2000 años."],
-        lessons: ["📖 Micro-Aprendizaje: Design Thinking centra en el usuario.", "📖 Micro-Aprendizaje: MVP es la versión mínima viable.", "📖 Micro-Aprendizaje: Prototipo sirve para aprender rápido.", "📖 Micro-Aprendizaje: Integridad estructural evita colapsos.", "📖 Micro-Aprendizaje: Análisis de causa raíz (Ishikawa)."]
-    },
-    "Lectura y Escritura": {
-        facts: ["💡 Leer reduce estrés en 68%.", "💡 Shakespeare inventó 1,700 palabras.", "💡 Biblioteca más antigua fue del s. VII a.C.", "💡 Leer en voz alta mejora la retención.", "💡 El libro más largo tiene 13.000 páginas."],
-        lessons: ["📖 Micro-Aprendizaje: Coherencia es sentido global.", "📖 Micro-Aprendizaje: APA protege derechos de autor.", "📖 Micro-Aprendizaje: Pensamiento Crítico evalúa validez.", "📖 Micro-Aprendizaje: Un argumento necesita evidencia sólida.", "📖 Micro-Aprendizaje: Tono y audiencia dictan el estilo."]
-    },
-    "Habilidades Digitales": {
-        facts: ["💡 Primer sitio web aún está online.", "💡 Huella digital es permanente.", "💡 '123456' es la clave más usada.", "💡 El 90% de los datos se creó en 2 años.", "💡 La Nube son servidores físicos reales."],
-        lessons: ["📖 Micro-Aprendizaje: Alfabetización evalúa info.", "📖 Micro-Aprendizaje: Netiqueta es respeto online.", "📖 Micro-Aprendizaje: Ciberseguridad requiere 2FA.", "📖 Micro-Aprendizaje: SEO mejora visibilidad web.", "📖 Micro-Aprendizaje: Curación filtra lo valioso."]
-    }
+    "Ciencia de Datos e IA": { facts: ["💡 El 80% del trabajo es limpiar datos.", "💡 Netflix ahorra mil millones con IA."], lessons: ["📖 Micro: Overfitting es memorizar.", "📖 Micro: Supervisado usa etiquetas."] },
+    "Algoritmia y Programación": { facts: ["💡 Ada Lovelace fue la 1ra.", "💡 'Bug' nació por una polilla real."], lessons: ["📖 Micro: Big O mide eficiencia.", "📖 Micro: Recursión se llama sola."] },
+    "Cálculo Diferencial": { facts: ["💡 Newton usó cálculo para los planetas.", "💡 Significa 'piedra pequeña'."], lessons: ["📖 Micro: Derivada es pendiente.", "📖 Micro: Límite es aproximación."] }
 };
 
+// --- SEGURIDAD Y LOGIN ---
 function handleLogin() {
-    let id = document.getElementById("userId").value;
-    if(!id) return;
+    const id = document.getElementById("userId").value;
+    const pass = document.getElementById("userPass").value;
+
+    if(!id || !pass) { alert("Complete sus credenciales"); return; }
+    
+    if(id !== pass) {
+        alert("ERROR: La contraseña debe ser idéntica al ID de usuario.");
+        return;
+    }
+
+    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
+    let name;
+
     if(id === "1000163215") {
-        init({nombre: "Brayan Calderon", carrera: "Data Scientist & IA Engineer", admin: true, id: id});
+        name = "Brayan Calderon";
+    } else if(db[id]) {
+        name = db[id];
     } else {
-        let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-        let name = db[id] || prompt("Bienvenido. ¿Tu nombre?");
-        if(!name) name = "Estudiante";
+        name = prompt("NUEVO INVESTIGADOR: Detectamos un nuevo enlace biométrico. ¿Cuál es su nombre?");
+        if(!name || name.trim() === "") name = "Científico Invitado";
         db[id] = name;
         localStorage.setItem("lx_db", JSON.stringify(db));
-        init({nombre: name, carrera: "Científico en Formación", admin: false, id: id});
     }
+
+    const userData = {nombre: name, carrera: (id === "1000163215" ? "Data Scientist & Engineer" : "Investigador Académico"), admin: (id === "1000163215"), id: id};
+    startNeuralEntrance(userData);
 }
 
-function init(user) {
-    currentUser = user;
+function startNeuralEntrance(user) {
+    const loader = document.getElementById("neuralLoader");
+    const status = document.getElementById("loaderStatus");
+    const bar = document.getElementById("progressBarFill");
     document.getElementById("loginScreen").style.display = "none";
+    loader.style.display = "flex";
+
+    let progress = 0;
+    const steps = ["Identificando...", "Enlazando NRC: 87926...", "Sincronizando IA...", "Enlace Neural Activo"];
+
+    const i = setInterval(() => {
+        progress += 2;
+        bar.style.width = progress + "%";
+        if(progress < 25) status.innerText = steps[0];
+        else if(progress < 60) status.innerText = steps[1];
+        else if(progress < 90) status.innerText = steps[2];
+        else status.innerText = steps[3];
+
+        if(progress >= 100) {
+            clearInterval(i);
+            setTimeout(() => {
+                loader.style.display = "none";
+                initDashboard(user);
+            }, 600);
+        }
+    }, 40);
+}
+
+function initDashboard(user) {
+    currentUser = user;
     document.getElementById("mainDashboard").style.display = "block";
     document.getElementById("headerBar").style.display = "flex";
     document.getElementById("cfgBtn").style.display = "block";
@@ -270,6 +337,33 @@ function init(user) {
     setTodayFoco(); updateWeather(); renderCalendar(); renderIntensityBars(); calculateScore();
 }
 
+// --- MODO ENFOQUE (CONTROL) ---
+let focusInterval;
+function activarFocus() {
+    document.getElementById("focusOverlay").style.display = "flex";
+    let min = 24, sec = 59;
+    
+    focusInterval = setInterval(() => {
+        document.getElementById("focusTimer").innerText = `${min}:${sec < 10 ? '0'+sec : sec}`;
+        if(sec === 0) {
+            if(min === 0) {
+                clearInterval(focusInterval);
+                desactivarFocus();
+            } else {
+                min--; sec = 59;
+            }
+        } else {
+            sec--;
+        }
+    }, 1000);
+}
+
+function desactivarFocus() {
+    clearInterval(focusInterval);
+    document.getElementById("focusOverlay").style.display = "none";
+}
+
+// --- LOGICA DASHBOARD ---
 function setTodayFoco() {
     const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const f = new Date();
@@ -280,40 +374,27 @@ function setTodayFoco() {
         case 2: m = "🔵 Tienes: <b>Algoritmia (6:15) y Cálculo (7:45)</b>"; break;
         case 3: m = "🟡 Tienes: <b>Soluciones Ingeniería (6:15) y Lectura (7:45)</b>"; break;
         case 4: m = "🔴 Tienes: <b>Habilidades Digitales (4:00)</b>"; break;
-        default: m = "🌴 Día sin clases. ¡Buen momento para repasar!";
+        default: m = "🌴 Día libre de clases. ¡Buen momento para repasar!";
     }
     document.getElementById("focoMaterias").innerHTML = m;
+}
+
+function updateWeather() {
+    document.getElementById("tempVal").innerText = "15°C";
+    document.getElementById("climaMood").innerText = "🌤️ TEMPLADO: LOGICA ACTIVA";
 }
 
 function runPrediction() {
     let sub = document.getElementById("subSelect").value;
     let panel = document.getElementById("ragPanel");
-    panel.innerHTML = "<em>Sincronizando...</em>";
+    panel.innerHTML = "<em>Procesando...</em>";
     setTimeout(() => {
         const data = KNOWLEDGE_DB[sub];
         if (data) {
             const combined = [...data.facts, ...data.lessons];
             panel.innerHTML = combined[Math.floor(Math.random() * combined.length)];
-        } else {
-            panel.innerHTML = "📖 <b>Concepto:</b> Analizando...";
         }
     }, 600);
-}
-
-function renderCalendar() {
-    let mes = parseInt(document.getElementById("mesSelector").value);
-    let cal = document.getElementById("calendario");
-    cal.innerHTML = "";
-    let dNum = new Date(2026, mes + 1, 0).getDate();
-    for(let d=1; d<=dNum; d++) {
-        let f = new Date(2026, mes, d).getDay();
-        let h = "";
-        if(f===1) h += `<div class="clase-cal c-lunes">IA</div>`;
-        if(f===2) h += `<div class="clase-cal c-martes">Algo</div><div class="clase-cal c-martes">Cálc</div>`;
-        if(f===3) h += `<div class="clase-cal c-miercoles">Ing</div>`;
-        if(f===4) h += `<div class="clase-cal c-jueves">Dig</div>`;
-        cal.innerHTML += `<div class="dia"><strong>${d}</strong>${h}</div>`;
-    }
 }
 
 function renderIntensityBars() {
@@ -323,8 +404,8 @@ function renderIntensityBars() {
     let uPrefs = prefs[currentUser.id] || {};
     SUBJECTS.forEach(sub => {
         let p = uPrefs[sub] || {cantidad: 0};
-        let intensity = (parseInt(p.cantidad) * 20);
-        container.innerHTML += `<div class="sync-visual-item"><div class="sync-label"><span>${sub}</span><span>${intensity}%</span></div><div class="sync-bar-bg"><div class="sync-bar-fill" style="width:${intensity}%"></div></div></div>`;
+        let intensity = (p.cantidad * 20);
+        container.innerHTML += `<div class="sync-visual-item"><div class="sync-label"><span>${sub}</span><span>${intensity}%</span></div><div class="progress-flat"><div class="progress-fill" style="width:${intensity}%"></div></div></div>`;
     });
 }
 
@@ -332,7 +413,7 @@ function calculateScore() {
     let prefs = JSON.parse(localStorage.getItem("lx_prefs")) || {};
     let uPrefs = prefs[currentUser.id] || {};
     let score = 35;
-    Object.values(uPrefs).forEach(p => { score += (parseInt(p.cantidad) * 7); });
+    Object.values(uPrefs).forEach(p => { score += (p.cantidad * 7); });
     if(score > 99) score = 99;
     document.getElementById("scoreValue").innerText = score + "%";
     document.getElementById("scoreIndicator").style.borderTopColor = score > 75 ? "#00f2ff" : "#ff4d6d";
@@ -344,15 +425,7 @@ function toggleConfig() {
     if (currentUser && currentUser.admin) {
         document.getElementById("adminZone").style.display = "block";
         loadAdminUsers();
-    } else {
-        document.getElementById("adminZone").style.display = "none";
     }
-}
-
-function updateWeather() {
-    const t = Math.floor(Math.random() * 8) + 12;
-    document.getElementById("tempVal").innerText = t + "°C";
-    document.getElementById("climaMood").innerText = t < 15 ? "❄️ FRÍO: FOCO ALTO" : "🌤️ TEMPLADO: LÓGICA ACTIVA";
 }
 
 function saveSubPrefs() {
@@ -364,45 +437,37 @@ function saveSubPrefs() {
     renderIntensityBars(); calculateScore(); alert("Sincronizado");
 }
 
-function loadSubPrefs() {
-    let sub = document.getElementById("cfgSub").value;
-    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-    if(all[currentUser.id] && all[currentUser.id][sub]) {
-        let p = all[currentUser.id][sub];
-        document.getElementById("cfgFreq").value = p.frecuencia;
-        document.getElementById("cfgQty").value = p.cantidad;
-    }
-}
-
-function clearAllUserData() {
-    if(confirm("¿Borrar tus ajustes?")) {
-        let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-        delete all[currentUser.id];
-        localStorage.setItem("lx_prefs", JSON.stringify(all));
-        renderIntensityBars(); calculateScore();
-    }
-}
-
+function logout() { location.reload(); }
+function toggleChat() { document.getElementById("chatInterface").style.display = (document.getElementById("chatInterface").style.display === "block") ? "none" : "block"; }
 function processChat() {
     let input = document.getElementById("chatInput");
     let hist = document.getElementById("chatHistory");
     if(!input.value) return;
     hist.innerHTML += `<div>👤: ${input.value}</div>`;
-    setTimeout(() => {
-        hist.innerHTML += `<div style="color:var(--accent)">🤖: Analizando...</div>`;
-        hist.scrollTop = hist.scrollHeight;
-    }, 400);
+    setTimeout(() => { hist.innerHTML += `<div style="color:var(--accent)">🤖: Analizando sentimiento...</div>`; hist.scrollTop = hist.scrollHeight; }, 400);
     input.value = "";
 }
 
-function logout() { location.reload(); }
-function toggleChat() { document.getElementById("chatInterface").style.display = (document.getElementById("chatInterface").style.display === "block") ? "none" : "block"; }
+function renderCalendar() {
+    let mes = parseInt(document.getElementById("mesSelector").value);
+    let cal = document.getElementById("calendario");
+    cal.innerHTML = "";
+    let dNum = new Date(2026, mes + 1, 0).getDate();
+    for(let d=1; d<=dNum; d++) {
+        let f = new Date(2026, mes, d).getDay();
+        let h = "";
+        if(f===1) h += `<div class="clase-cal c-lunes">IA</div>`;
+        if(f===2) h += `<div class="clase-cal c-martes">Algo</div>`;
+        if(f===3) h += `<div class="clase-cal c-miercoles">Ing</div>`;
+        cal.innerHTML += `<div class="dia"><strong>${d}</strong>${h}</div>`;
+    }
+}
 
 function loadAdminUsers() {
     let db = JSON.parse(localStorage.getItem("lx_db")) || {};
     let list = document.getElementById("adminUserList");
     list.innerHTML = "";
-    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]} (${id})</option>`; });
+    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]}</option>`; });
 }
 function modifyUserName() {
     let id = document.getElementById("adminUserList").value;
@@ -416,6 +481,21 @@ function deleteUser() {
     let db = JSON.parse(localStorage.getItem("lx_db")) || {};
     delete db[id]; localStorage.setItem("lx_db", JSON.stringify(db));
     loadAdminUsers();
+}
+function clearAllUserData() {
+    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
+    delete all[currentUser.id];
+    localStorage.setItem("lx_prefs", JSON.stringify(all));
+    renderIntensityBars(); calculateScore();
+}
+function loadSubPrefs() {
+    let sub = document.getElementById("cfgSub").value;
+    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
+    if(all[currentUser.id] && all[currentUser.id][sub]) {
+        let p = all[currentUser.id][sub];
+        document.getElementById("cfgFreq").value = p.frecuencia;
+        document.getElementById("cfgQty").value = p.cantidad;
+    }
 }
 </script>
 </body>
