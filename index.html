@@ -24,35 +24,17 @@ body {
     min-height: 100vh; overflow-x: hidden;
 }
 
-/* --- INTERFAZ DE CARGA INTERACTIVA --- */
+/* --- INTERFAZ DE CARGA --- */
 #neuralLoader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: #000; z-index: 9999; display: none;
     flex-direction: column; align-items: center; justify-content: center;
 }
-
-.scanner-line {
-    width: 300px; height: 2px; background: var(--accent);
-    box-shadow: 0 0 15px var(--accent);
-    position: absolute; animation: scan 2s infinite ease-in-out;
-}
-
+.scanner-line { width: 300px; height: 2px; background: var(--accent); box-shadow: 0 0 15px var(--accent); position: absolute; animation: scan 2s infinite ease-in-out; }
 @keyframes scan { 0% { top: 30%; } 50% { top: 70%; } 100% { top: 30%; } }
-
-.loader-text {
-    font-size: 12px; letter-spacing: 3px; color: var(--accent);
-    margin-top: 20px; font-weight: bold; text-transform: uppercase;
-}
-
-.progress-bar-container {
-    width: 250px; height: 4px; background: #111; border-radius: 10px;
-    margin-top: 15px; overflow: hidden; border: 1px solid #222;
-}
-
-#progressBarFill {
-    width: 0%; height: 100%; background: var(--accent);
-    box-shadow: 0 0 10px var(--accent); transition: 0.1s;
-}
+.loader-text { font-size: 12px; letter-spacing: 3px; color: var(--accent); margin-top: 20px; font-weight: bold; text-transform: uppercase; }
+.progress-bar-container { width: 250px; height: 4px; background: #111; border-radius: 10px; margin-top: 15px; overflow: hidden; border: 1px solid #222; }
+#progressBarFill { width: 0%; height: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: 0.1s; }
 
 /* --- HEADER BAR --- */
 #headerBar {
@@ -61,30 +43,14 @@ body {
     border-bottom: 1px solid var(--border); padding: 0 30px; height: 80px;
     align-items: center; justify-content: space-between;
 }
-
-.header-left, .header-right { display: flex; gap: 20px; align-items: center; }
-
-#climaWidget {
-    background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 12px;
-    border: 1px solid var(--border); font-size: 11px; text-align: right; line-height: 1.3;
-}
-
-.btn-logout {
-    background: var(--primary); color: white; border: none; padding: 10px 18px;
-    border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.3s;
-}
+#climaWidget { background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 12px; border: 1px solid var(--border); font-size: 11px; text-align: right; line-height: 1.3; }
+.btn-logout { background: var(--primary); color: white; border: none; padding: 10px 18px; border-radius: 8px; cursor: pointer; font-size: 11px; font-weight: bold; transition: 0.3s; }
 
 /* --- DASHBOARD --- */
 .container { display: none; padding: 30px; max-width: 1400px; margin: 0 auto; }
 .layout { display: grid; grid-template-columns: 2fr 1fr; gap: 25px; }
 .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 25px; margin-bottom: 20px; }
-
-/* SCORE CIRCLE */
-.score-circle {
-    width: 115px; height: 115px; border-radius: 50%; border: 6px solid #1a1a1c;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    margin: 15px auto; border-top-color: var(--accent); transition: 1s ease;
-}
+.score-circle { width: 115px; height: 115px; border-radius: 50%; border: 6px solid #1a1a1c; display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 15px auto; border-top-color: var(--accent); transition: 1s ease; }
 
 /* LOGIN */
 #loginScreen { display: flex; justify-content: center; align-items: center; height: 100vh; }
@@ -94,51 +60,48 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 
 /* PANELES FLOTANTES */
 .floating-btn { position: fixed; bottom: 30px; right: 30px; background: var(--primary); width: 60px; height: 60px; border-radius: 50%; border: none; cursor: pointer; display: none; color: white; font-size: 24px; z-index: 1002; transition: 0.3s; }
-#chatLaunch { left: 30px; right: auto; background: var(--accent); color: black; }
-#configPanel { position: fixed; bottom: 100px; right: 30px; width: 360px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; z-index: 1001; padding: 25px; }
-#chatInterface { position: fixed; bottom: 100px; left: 30px; width: 320px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; padding: 20px; z-index: 1001; }
-#chatHistory { height: 200px; overflow-y: auto; font-size: 12px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+#chatLaunch { left: 30px; right: auto; background: var(--accent); color: black; box-shadow: 0 0 15px rgba(0, 242, 255, 0.4); }
+#configPanel { position: fixed; bottom: 100px; right: 30px; width: 360px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; display: none; z-index: 1001; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
+/* --- SENTINEL IA v2.4 --- */
+#chatInterface { position: fixed; bottom: 100px; left: 30px; width: 320px; background: #111113; border: 1px solid #28282b; border-radius: 20px; display: none; padding: 20px; z-index: 1001; box-shadow: 0 15px 40px rgba(0,0,0,0.7); color: #f8f9fa; }
+#chatHistory { height: 250px; overflow-y: auto; font-size: 12px; margin-bottom: 12px; border-bottom: 1px solid #333; padding-bottom: 10px; scroll-behavior: smooth; }
+.msg { margin-bottom: 10px; padding: 10px 14px; border-radius: 12px; line-height: 1.5; }
+.user-msg { background: #1e1e21; text-align: right; margin-left: 20%; border-bottom-right-radius: 2px; }
+.ai-msg { background: rgba(0, 242, 255, 0.05); border: 1px solid rgba(0, 242, 255, 0.15); margin-right: 20%; border-bottom-left-radius: 2px; }
+.chat-input-area { display: flex; gap: 8px; }
+.chat-input-area input { flex: 1; background: #000; border: 1px solid #28282b; color: white; padding: 10px; border-radius: 10px; outline: none; font-size: 13px; }
+.chat-input-area button { background: #00f2ff; border: none; border-radius: 10px; width: 40px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+
+/* FOCO Y CALENDARIO */
 #focoDiaCard { background: linear-gradient(135deg, #1a1a1c, #070708); border-left: 5px solid var(--accent); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 1px solid var(--border); }
-
-/* --- MODO ENFOQUE OVERLAY --- */
-#focusOverlay { 
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-    background: rgba(0, 0, 0, 0.98); z-index: 5000; 
-    display: none; 
-    flex-direction: column; align-items: center; justify-content: center; text-align: center; 
-}
-
-/* ADMIN */
-.admin-zone { background: rgba(200, 16, 46, 0.05); padding: 15px; border-radius: 15px; border: 1px solid #333; margin-top: 25px; display: none; }
-
 #calendario { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 15px; }
 .dia { background: #161618; padding: 10px; border-radius: 10px; min-height: 105px; border: 1px solid #222; }
 .clase-cal { font-size: 8px; margin-top: 4px; padding: 4px; border-radius: 4px; color: white; font-weight: bold; }
 
+/* OTROS */
+#focusOverlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.98); z-index: 5000; display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+.admin-zone { background: rgba(200, 16, 46, 0.05); padding: 15px; border-radius: 15px; border: 1px solid #333; margin-top: 25px; display: none; }
 .sync-visual-item { margin-bottom: 15px; }
 .sync-label { font-size: 10px; display: flex; justify-content: space-between; margin-bottom: 6px; }
 .progress-flat { height: 6px; background: #1c1c1e; border-radius: 3px; border: 1px solid #222; overflow: hidden; }
 .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent)); width: 0%; transition: 1.5s ease; }
+.loading-dots:after { content: ' .'; animation: dots 1.5s steps(5, end) infinite; }
+@keyframes dots { 0%, 20% { color: rgba(0,0,0,0); text-shadow: .5em 0 0 rgba(0,0,0,0), 1em 0 0 rgba(0,0,0,0); } 40% { color: #00f2ff; text-shadow: .5em 0 0 rgba(0,0,0,0), 1em 0 0 rgba(0,0,0,0); } 60% { text-shadow: .5em 0 0 #00f2ff, 1em 0 0 rgba(0,0,0,0); } 80%, 100% { text-shadow: .5em 0 0 #00f2ff, 1em 0 0 #00f2ff; } }
 </style>
 </head>
 <body>
 
-<!-- MODO ENFOQUE -->
 <div id="focusOverlay">
     <h2 style="color:var(--accent); letter-spacing: 5px;">MODO ENFOQUE NEURAL</h2>
     <div id="focusTimer" style="font-size: 100px; font-weight: 900; color: white; margin: 20px;">25:00</div>
-    <p style="color:var(--text-dim); max-width: 500px; margin-bottom: 30px;">La IA ha bloqueado distracciones externas. Concéntrate en tu aprendizaje.</p>
     <button onclick="desactivarFocus()" style="background:transparent; border:1px solid var(--primary); color:white; padding:12px 30px; border-radius:10px; cursor:pointer; font-weight:bold;">FINALIZAR SESIÓN</button>
 </div>
 
-<!-- CARGA NEURAL -->
 <div id="neuralLoader">
     <div class="scanner-line"></div>
     <div id="loaderStatus" class="loader-text">Iniciando Protocolo...</div>
-    <div class="progress-bar-container">
-        <div id="progressBarFill"></div>
-    </div>
+    <div class="progress-bar-container"><div id="progressBarFill"></div></div>
 </div>
 
 <div id="headerBar">
@@ -162,7 +125,6 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
         <input id="userId" placeholder="ID de Usuario">
         <input id="userPass" type="password" placeholder="Contraseña">
         <button class="btn-prime" onclick="handleLogin()">ACCEDER AL NÚCLEO</button>
-        <p style="font-size: 10px; color: #444; margin-top: 15px;">Seguridad: ID y Contraseña deben ser idénticos.</p>
     </div>
 </div>
 
@@ -182,12 +144,12 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
     </div>
 
     <div class="layout">
-        <div style="display:flex; flex-direction:column;">
+        <div>
             <div class="card">
                 <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
                     <h3 style="margin:0;">📅 Horario Académico</h3>
                     <select id="mesSelector" onchange="renderCalendar()" style="width:auto; height: 30px; font-size: 11px;">
-                        <option value="3">Abril 2026</option><option value="4">Mayo 2026</option><option value="5">Junio 2026</option>
+                        <option value="3">Abril 2026</option><option value="4">Mayo 2026</option>
                     </select>
                 </div>
                 <div id="calendario"></div>
@@ -197,23 +159,20 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
                 <div id="syncVisualContainer"></div>
             </div>
         </div>
-
-        <div style="display:flex; flex-direction:column;">
+        <div>
             <div class="card" style="text-align:center;">
                 <h3 style="margin:0; font-size: 12px; text-transform:uppercase; color:var(--text-dim);">Éxito Académico</h3>
                 <div class="score-circle" id="scoreIndicator">
                     <span id="scoreValue" style="font-size:32px; font-weight:900;">--</span>
                     <span style="font-size:10px; color:var(--text-dim); font-weight: bold;">SCORE</span>
                 </div>
-                <p id="predictionText" style="font-size:12px; color:var(--text-dim); line-height:1.5;"></p>
+                <p id="predictionText" style="font-size:12px; color:var(--text-dim); line-height:1.5;">La IA estima un cumplimiento óptimo.</p>
             </div>
             <div class="card">
                 <h3 style="margin:0; font-size: 16px; margin-bottom:15px;">📚 Micro-Dosis IA</h3>
                 <select id="subSelect"></select>
                 <button class="btn-prime" onclick="runPrediction()">OBTENER MICRO-APRENDIZAJE</button>
-                <div id="ragPanel" style="padding:18px; background:#000; border-radius:15px; margin-top:20px; font-size:13px; color:var(--text-dim); border:1px solid #222; line-height:1.7;">
-                    <em>Analizando...</em>
-                </div>
+                <div id="ragPanel" style="padding:18px; background:#000; border-radius:15px; margin-top:20px; font-size:13px; color:var(--text-dim); border:1px solid #222; line-height:1.7;"><em>Analizando...</em></div>
             </div>
         </div>
     </div>
@@ -223,116 +182,88 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; background: #000; bo
 <button id="cfgBtn" class="floating-btn" onclick="toggleConfig()">⚙️</button>
 
 <div id="configPanel">
-    <h3 style="margin:0 0 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px;">Ajustes IA</h3>
-    <label style="font-size:11px; color:var(--accent); font-weight: bold;">SINCRO POR MATERIA</label>
+    <h3 style="margin:0 0 20px 0; border-bottom: 1px solid #333; padding-bottom: 10px; color:var(--accent);">AJUSTES IA</h3>
+    <label style="font-size:11px; font-weight: bold;">SINCRO POR MATERIA</label>
     <select id="cfgSub" onchange="loadSubPrefs()"></select>
     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
         <select id="cfgFreq"><option value="15">15 min</option><option value="30">30 min</option></select>
-        <select id="cfgQty"><option value="1">1 msg</option><option value="3">3 msg</option><option value="5">5 msg</option></select>
+        <select id="cfgQty"><option value="1">1 msg</option><option value="3">3 msg</option></select>
     </div>
     <button class="btn-prime" onclick="saveSubPrefs()" style="margin-top:10px;">GUARDAR</button>
-    
     <div id="adminZone" class="admin-zone">
-        <p style="font-size:11px; color:var(--primary-light); font-weight:bold; margin:0 0 10px 0;">🛡️ GESTIÓN ADMIN (USUARIOS)</p>
+        <p style="font-size:11px; color:var(--primary-light); font-weight:bold;">🛡️ GESTIÓN ADMIN</p>
         <select id="adminUserList"></select>
-        <div style="display:flex; gap:10px; margin-top:10px;">
-            <input id="adminNewName" placeholder="Renombrar" style="margin:0; font-size:10px;">
-            <button class="btn-prime" style="font-size:10px; width:40px;" onclick="modifyUserName()">OK</button>
-            <button class="btn-prime" style="background:#333; font-size:10px; width:40px;" onclick="deleteUser()">DEL</button>
-        </div>
+        <button class="btn-prime" style="font-size:10px; margin-top:5px;" onclick="deleteUser()">BORRAR USUARIO</button>
     </div>
-    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px; font-weight:bold;">🗑️ BORRAR MIS AJUSTES</button>
+    <button onclick="clearAllUserData()" style="background:transparent; color:#ff4d6d; border:1px solid #444; padding:10px; width:100%; border-radius:10px; cursor:pointer; font-size:11px; margin-top:25px;">🗑️ BORRAR MIS AJUSTES</button>
 </div>
 
 <div id="chatInterface">
-    <h3 style="margin:0; font-size:14px; color:var(--accent);">SENTINEL IA</h3>
-    <div id="chatHistory"></div>
-    <input id="chatInput" placeholder="¿Cómo te sientes?" onkeyup="if(event.key==='Enter') processChat()">
+    <h3 style="margin:0 0 15px 0; font-size:14px; color:#00f2ff; letter-spacing: 1px;">SENTINEL IA v2.4</h3>
+    <div id="chatHistory">
+        <div class="msg ai-msg">Sistemas en línea. Enlace establecido. ¿En qué puedo asistirte hoy?</div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chatInput" placeholder="Escribe al núcleo..." onkeyup="if(event.key==='Enter') processChat()">
+        <button onclick="processChat()">></button>
+    </div>
 </div>
 
 <script>
 let currentUser = null;
+let focusInterval;
 const SUBJECTS = ["Ciencia de Datos e IA", "Algoritmia y Programación", "Cálculo Diferencial", "Soluciones de Ingeniería", "Lectura y Escritura", "Habilidades Digitales"];
 
-// --- 1. BASE DE CONOCIMIENTOS EXPANDIDA (MICRO-CONTENIDOS) ---
 const KNOWLEDGE_DB = {
-    "Ciencia de Datos e IA": { 
-        facts: ["💡 El 90% de los datos del mundo se crearon en los últimos 2 años.", "💡 Netflix ahorra mil millones de dólares al año gracias a su IA de recomendaciones.", "💡 La IA puede diagnosticar el cáncer de piel con mayor precisión que los dermatólogos."], 
-        lessons: ["📖 Micro: El 'Overfitting' es cuando la IA memoriza en lugar de aprender.", "📖 Micro: Los datos 'sucios' son la causa #1 de fallos en modelos predictivos.", "📖 Micro: El aprendizaje supervisado requiere etiquetas creadas por humanos."] 
-    },
-    "Algoritmia y Programación": { 
-        facts: ["💡 El primer 'bug' de la historia fue una polilla real atrapada en un relé.", "💡 Ada Lovelace escribió el primer algoritmo 100 años antes de que existieran las computadoras modernas.", "💡 El lenguaje Python no se llama así por la serpiente, sino por el grupo de comedia Monty Python."], 
-        lessons: ["📖 Micro: La recursión es una función que se llama a sí misma hasta llegar a un caso base.", "📖 Micro: La complejidad O(1) es el santo grial de la eficiencia algorítmica.", "📖 Micro: Un puntero es una variable que almacena una dirección de memoria."] 
-    },
-    "Cálculo Diferencial": { 
-        facts: ["💡 Newton y Leibniz inventaron el cálculo casi al mismo tiempo de forma independiente.", "💡 La palabra 'Cálculo' significa 'piedra pequeña' en latín, usada para contar.", "💡 El GPS de tu celular usa derivadas para ajustar tu posición exacta en tiempo real."], 
-        lessons: ["📖 Micro: La derivada representa la pendiente de la recta tangente en un punto.", "📖 Micro: Si el límite de una función no es igual por izquierda y derecha, el límite no existe.", "📖 Micro: La regla de la cadena permite derivar funciones compuestas."] 
-    },
-    "Soluciones de Ingeniería": { 
-        facts: ["💡 Los ingenieros romanos inventaron un hormigón que se endurece bajo el agua.", "💡 La Gran Pirámide de Giza fue la estructura más alta del mundo por 3,800 años.", "💡 El primer puente de hierro fundido se construyó en 1779 y aún sigue en pie."], 
-        lessons: ["📖 Micro: El ciclo de diseño comienza con la empatía y definición del problema.", "📖 Micro: La sostenibilidad busca soluciones que no comprometan el futuro.", "📖 Micro: Un prototipo no debe ser perfecto, debe ser funcional para probar una idea."] 
-    },
-    "Lectura y Escritura": { 
-        facts: ["💡 Leer solo 6 minutos al día reduce los niveles de estrés en un 68%.", "💡 El libro más vendido de la historia después de la Biblia es 'Don Quijote de la Mancha'.", "💡 Escribir a mano activa más áreas del cerebro que escribir en un teclado."], 
-        lessons: ["📖 Micro: La coherencia es la unidad de sentido; la cohesión es la conexión gramatical.", "📖 Micro: Una tesis debe ser debatible, no un hecho obvio.", "📖 Micro: El parafraseo evita el plagio pero requiere citar la fuente original."] 
-    },
-    "Habilidades Digitales": { 
-        facts: ["💡 Cada minuto se suben más de 500 horas de video a YouTube.", "💡 El primer correo electrónico se envió en 1971 por Ray Tomlinson.", "💡 El 80% de los ciberataques se podrían evitar con una buena higiene digital."], 
-        lessons: ["📖 Micro: Tu huella digital es el rastro que dejas en internet y es casi permanente.", "📖 Micro: El phishing usa ingeniería social para robar tus credenciales.", "📖 Micro: Una contraseña segura debe tener al menos 12 caracteres y ser única."] 
-    }
+    "Ciencia de Datos e IA": { facts: ["💡 El 90% de los datos del mundo se crearon recientemente.", "💡 El Overfitting es memorizar en lugar de aprender."] },
+    "Algoritmia y Programación": { facts: ["💡 Ada Lovelace escribió el primer algoritmo.", "💡 La complejidad O(1) es la más eficiente."] },
+    "Cálculo Diferencial": { facts: ["💡 Newton y Leibniz inventaron el cálculo.", "💡 La derivada es la pendiente de la recta tangente."] },
+    "Soluciones de Ingeniería": { facts: ["💡 El diseño comienza con la empatía.", "💡 Un prototipo debe probar una idea rápido."] },
+    "Lectura y Escritura": { facts: ["💡 Leer 6 minutos reduce el estrés.", "💡 La coherencia es la unidad de sentido."] },
+    "Habilidades Digitales": { facts: ["💡 Tu huella digital es permanente.", "💡 El phishing usa ingeniería social."] }
 };
 
-// --- 2. SEGURIDAD Y LOGIN (GUARDADO DE USUARIOS) ---
+// --- LOGICA DE LOGIN Y ADMINISTRADORES ---
 function handleLogin() {
     const id = document.getElementById("userId").value;
     const pass = document.getElementById("userPass").value;
-
-    if(!id || !pass) { alert("Complete sus credenciales"); return; }
-    if(id !== pass) { alert("ERROR: La contraseña debe ser idéntica al ID."); return; }
-
+    
+    // DEFINICIÓN DE ADMINISTRADORES
+    const adminDict = {
+        "1000163215": "Brayan Calderon",
+        "1028484481": "Elkin Duban Lazaro"
+    };
+    
+    if(id !== pass || !id) { alert("ERROR DE CREDENCIALES"); return; }
+    
     let db = JSON.parse(localStorage.getItem("lx_db")) || {};
     let name;
 
-    if(id === "1000163215") {
-        name = "Brayan Calderon";
-    } else if(db[id]) {
-        name = db[id];
+    if(adminDict[id]) {
+        name = adminDict[id]; // Reconoce a Brayan o Elkin Duban Lazaro 
     } else {
-        name = prompt("NUEVO INVESTIGADOR: Detectamos un nuevo enlace biométrico. ¿Cuál es su nombre?");
-        if(!name || name.trim() === "") name = "Científico Invitado";
-        db[id] = name;
-        localStorage.setItem("lx_db", JSON.stringify(db));
+        name = db[id] || prompt("Nuevo enlace biométrico detectado. ¿Nombre del Investigador?");
     }
-
-    const userData = {nombre: name, carrera: (id === "1000163215" ? "Data Scientist & Engineer" : "Investigador Académico"), admin: (id === "1000163215"), id: id};
-    startNeuralEntrance(userData);
+    
+    db[id] = name; 
+    localStorage.setItem("lx_db", JSON.stringify(db));
+    
+    startNeuralEntrance({
+        nombre: name, 
+        carrera: (adminDict[id] ? "Admin de Sistemas & Engineer" : "Investigador Académico"), 
+        admin: !!adminDict[id], 
+        id: id
+    });
 }
 
 function startNeuralEntrance(user) {
-    const loader = document.getElementById("neuralLoader");
-    const status = document.getElementById("loaderStatus");
-    const bar = document.getElementById("progressBarFill");
     document.getElementById("loginScreen").style.display = "none";
-    loader.style.display = "flex";
-
+    document.getElementById("neuralLoader").style.display = "flex";
     let progress = 0;
-    const steps = ["Identificando...", "Enlazando NRC...", "Sincronizando IA...", "Acceso Concedido"];
-
     const i = setInterval(() => {
         progress += 4;
-        bar.style.width = progress + "%";
-        if(progress < 25) status.innerText = steps[0];
-        else if(progress < 60) status.innerText = steps[1];
-        else if(progress < 90) status.innerText = steps[2];
-        else status.innerText = steps[3];
-
-        if(progress >= 100) {
-            clearInterval(i);
-            setTimeout(() => {
-                loader.style.display = "none";
-                initDashboard(user);
-            }, 600);
-        }
+        document.getElementById("progressBarFill").style.width = progress + "%";
+        if(progress >= 100) { clearInterval(i); document.getElementById("neuralLoader").style.display = "none"; initDashboard(user); }
     }, 50);
 }
 
@@ -342,83 +273,17 @@ function initDashboard(user) {
     document.getElementById("headerBar").style.display = "flex";
     document.getElementById("cfgBtn").style.display = "block";
     document.getElementById("chatLaunch").style.display = "block";
-    
     document.getElementById("userNameLabel").innerText = "Hola, " + user.nombre;
     document.getElementById("userMajorLabel").innerText = user.carrera.toUpperCase();
-
-    let s1 = document.getElementById("subSelect");
-    let s2 = document.getElementById("cfgSub");
+    
+    let s1 = document.getElementById("subSelect"), s2 = document.getElementById("cfgSub");
     s1.innerHTML = ""; s2.innerHTML = "";
-    SUBJECTS.forEach(s => { 
-        s1.innerHTML += `<option>${s}</option>`; 
-        s2.innerHTML += `<option>${s}</option>`; 
-    });
-
+    SUBJECTS.forEach(s => { s1.innerHTML += `<option>${s}</option>`; s2.innerHTML += `<option>${s}</option>`; });
+    
     setTodayFoco(); updateWeather(); renderCalendar(); renderIntensityBars(); calculateScore();
 }
 
-// --- LOGICA DE MATERIAS Y PRESTRACCIONES ---
-function runPrediction() {
-    let sub = document.getElementById("subSelect").value;
-    let panel = document.getElementById("ragPanel");
-    panel.innerHTML = "<em>Procesando micro-aprendizaje...</em>";
-    setTimeout(() => {
-        const data = KNOWLEDGE_DB[sub];
-        if (data) {
-            const combined = [...data.facts, ...data.lessons];
-            panel.innerHTML = combined[Math.floor(Math.random() * combined.length)];
-        }
-    }, 600);
-}
-
-// --- ADMIN CONTROL ---
-function toggleConfig() {
-    let p = document.getElementById("configPanel");
-    p.style.display = (p.style.display === "block") ? "none" : "block";
-    if (currentUser && currentUser.admin) {
-        document.getElementById("adminZone").style.display = "block";
-        loadAdminUsers();
-    }
-}
-
-function loadAdminUsers() {
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    let list = document.getElementById("adminUserList");
-    list.innerHTML = "";
-    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]} (${id})</option>`; });
-}
-
-function modifyUserName() {
-    let id = document.getElementById("adminUserList").value;
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    let newName = document.getElementById("adminNewName").value;
-    if(!newName) return;
-    db[id] = newName;
-    localStorage.setItem("lx_db", JSON.stringify(db));
-    loadAdminUsers();
-}
-
-function deleteUser() {
-    let id = document.getElementById("adminUserList").value;
-    if(id === "1000163215") { alert("No puedes borrar al admin."); return; }
-    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
-    delete db[id]; 
-    localStorage.setItem("lx_db", JSON.stringify(db));
-    loadAdminUsers();
-}
-
-// --- RESTO DE FUNCIONES ORIGINALES ---
-function activarFocus() {
-    document.getElementById("focusOverlay").style.display = "flex";
-    let min = 24, sec = 59;
-    focusInterval = setInterval(() => {
-        document.getElementById("focusTimer").innerText = `${min}:${sec < 10 ? '0'+sec : sec}`;
-        if(sec === 0) { if(min === 0) { clearInterval(focusInterval); desactivarFocus(); } else { min--; sec = 59; } } else { sec--; }
-    }, 1000);
-}
-
-function desactivarFocus() { clearInterval(focusInterval); document.getElementById("focusOverlay").style.display = "none"; }
-
+// --- HORARIOS ---
 function setTodayFoco() {
     const dias = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
     const f = new Date();
@@ -434,52 +299,6 @@ function setTodayFoco() {
     document.getElementById("focoMaterias").innerHTML = m;
 }
 
-function updateWeather() {
-    document.getElementById("tempVal").innerText = "15°C";
-    document.getElementById("climaMood").innerText = "🌤️ TEMPLADO: LOGICA ACTIVA";
-}
-
-function renderIntensityBars() {
-    let container = document.getElementById("syncVisualContainer");
-    container.innerHTML = "";
-    let prefs = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-    let uPrefs = prefs[currentUser.id] || {};
-    SUBJECTS.forEach(sub => {
-        let p = uPrefs[sub] || {cantidad: 0};
-        let intensity = (p.cantidad * 20);
-        container.innerHTML += `<div class="sync-visual-item"><div class="sync-label"><span>${sub}</span><span>${intensity}%</span></div><div class="progress-flat"><div class="progress-fill" style="width:${intensity}%"></div></div></div>`;
-    });
-}
-
-function calculateScore() {
-    let prefs = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-    let uPrefs = prefs[currentUser.id] || {};
-    let score = 45;
-    Object.values(uPrefs).forEach(p => { score += (p.cantidad * 7); });
-    if(score > 99) score = 99;
-    document.getElementById("scoreValue").innerText = score + "%";
-}
-
-function saveSubPrefs() {
-    let sub = document.getElementById("cfgSub").value;
-    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-    if(!all[currentUser.id]) all[currentUser.id] = {};
-    all[currentUser.id][sub] = {frecuencia: document.getElementById("cfgFreq").value, cantidad: document.getElementById("cfgQty").value};
-    localStorage.setItem("lx_prefs", JSON.stringify(all));
-    renderIntensityBars(); calculateScore(); alert("Sincronizado");
-}
-
-function logout() { location.reload(); }
-function toggleChat() { document.getElementById("chatInterface").style.display = (document.getElementById("chatInterface").style.display === "block") ? "none" : "block"; }
-function processChat() {
-    let input = document.getElementById("chatInput");
-    let hist = document.getElementById("chatHistory");
-    if(!input.value) return;
-    hist.innerHTML += `<div>👤: ${input.value}</div>`;
-    setTimeout(() => { hist.innerHTML += `<div style="color:var(--accent)">🤖: Analizando sentimiento...</div>`; hist.scrollTop = hist.scrollHeight; }, 400);
-    input.value = "";
-}
-
 function renderCalendar() {
     let mes = parseInt(document.getElementById("mesSelector").value);
     let cal = document.getElementById("calendario");
@@ -491,17 +310,86 @@ function renderCalendar() {
         if(f===1) h += `<div class="clase-cal" style="background:var(--lunes)">IA</div>`;
         if(f===2) h += `<div class="clase-cal" style="background:var(--martes)">Algo</div>`;
         if(f===3) h += `<div class="clase-cal" style="background:var(--miercoles)">Ing</div>`;
+        if(f===4) h += `<div class="clase-cal" style="background:var(--jueves)">Hab.D</div>`;
         cal.innerHTML += `<div class="dia"><strong>${d}</strong>${h}</div>`;
     }
 }
 
-function clearAllUserData() {
-    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
-    delete all[currentUser.id];
-    localStorage.setItem("lx_prefs", JSON.stringify(all));
-    renderIntensityBars(); calculateScore();
+// --- SENTINEL IA v2.4 (DINÁMICO) ---
+async function processChat() {
+    const input = document.getElementById("chatInput");
+    const hist = document.getElementById("chatHistory");
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    hist.innerHTML += `<div class="msg user-msg">${userText}</div>`;
+    input.value = "";
+    hist.scrollTop = hist.scrollHeight;
+
+    const loadingId = "loading-" + Date.now();
+    hist.innerHTML += `<div id="${loadingId}" class="msg ai-msg"><span class="loading-dots">Analizando variables</span></div>`;
+    hist.scrollTop = hist.scrollHeight;
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    let response = "";
+    const query = userText.toLowerCase();
+
+    if (query === "si" || query === "sí") {
+        response = `Protocolo confirmado. Como ${currentUser.admin ? 'Administrador del Núcleo' : 'Investigador'}, tus variables de respuesta son consistentes.`;
+    } else if (query.includes("hola")) {
+        response = `Enlace establecido, ${currentUser.nombre}. El sistema reconoce tu firma biométrica como ${currentUser.admin ? 'NIVEL ADMIN' : 'NIVEL ACADÉMICO'}.`;
+    } else {
+        response = `Procesando: "${userText}". Sincronizando con tu perfil de ${currentUser.carrera}. Sin errores en el núcleo.`;
+    }
+
+    document.getElementById(loadingId).innerHTML = response;
+    hist.scrollTop = hist.scrollHeight;
 }
 
+// --- FUNCIONES SOPORTE ---
+function activarFocus() { document.getElementById("focusOverlay").style.display = "flex"; }
+function desactivarFocus() { document.getElementById("focusOverlay").style.display = "none"; }
+function updateWeather() { document.getElementById("tempVal").innerText = "15°C"; document.getElementById("climaMood").innerText = "🌤️ TEMPLADO: LOGICA ACTIVA"; }
+function toggleChat() { let c = document.getElementById("chatInterface"); c.style.display = (c.style.display === "block") ? "none" : "block"; }
+function toggleConfig() { 
+    let p = document.getElementById("configPanel"); p.style.display = (p.style.display === "block") ? "none" : "block";
+    if(currentUser.admin) { document.getElementById("adminZone").style.display = "block"; loadAdminUsers(); }
+}
+function loadAdminUsers() {
+    let db = JSON.parse(localStorage.getItem("lx_db")) || {};
+    let list = document.getElementById("adminUserList"); list.innerHTML = "";
+    Object.keys(db).forEach(id => { list.innerHTML += `<option value="${id}">${db[id]} (${id})</option>`; });
+}
+function deleteUser() {
+    let id = document.getElementById("adminUserList").value;
+    if(id === "1000163215" || id === "1028484481") { alert("No se puede borrar a un administrador."); return; }
+    let db = JSON.parse(localStorage.getItem("lx_db")); delete db[id];
+    localStorage.setItem("lx_db", JSON.stringify(db)); loadAdminUsers();
+}
+function renderIntensityBars() {
+    let container = document.getElementById("syncVisualContainer"); container.innerHTML = "";
+    let prefs = JSON.parse(localStorage.getItem("lx_prefs")) || {};
+    let uPrefs = prefs[currentUser.id] || {};
+    SUBJECTS.forEach(sub => {
+        let val = (uPrefs[sub]?.cantidad || 0) * 20;
+        container.innerHTML += `<div class="sync-visual-item"><div class="sync-label"><span>${sub}</span><span>${val}%</span></div><div class="progress-flat"><div class="progress-fill" style="width:${val}%"></div></div></div>`;
+    });
+}
+function calculateScore() { document.getElementById("scoreValue").innerText = "85%"; }
+function saveSubPrefs() {
+    let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
+    if(!all[currentUser.id]) all[currentUser.id] = {};
+    all[currentUser.id][document.getElementById("cfgSub").value] = {frecuencia: document.getElementById("cfgFreq").value, cantidad: document.getElementById("cfgQty").value};
+    localStorage.setItem("lx_prefs", JSON.stringify(all)); renderIntensityBars(); alert("Sincronizado.");
+}
+function logout() { location.reload(); }
+function clearAllUserData() { localStorage.removeItem("lx_prefs"); location.reload(); }
+function runPrediction() {
+    let sub = document.getElementById("subSelect").value;
+    const data = KNOWLEDGE_DB[sub].facts;
+    document.getElementById("ragPanel").innerHTML = data[Math.floor(Math.random() * data.length)];
+}
 function loadSubPrefs() {
     let sub = document.getElementById("cfgSub").value;
     let all = JSON.parse(localStorage.getItem("lx_prefs")) || {};
